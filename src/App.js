@@ -14,9 +14,9 @@ import UserOutput from "./User/UserOutput/UserOutput";
 class App extends Component {
   state = {
     students: [
-      { name: "John", age: 28 },
-      { name: "Stephie", age: 25 },
-      { name: "Mark", age: 29 }
+      { id: "aa1", name: "John", age: 28 },
+      { id: "bb1", name: "Stephie", age: 25 },
+      { id: "cc1", name: "Mark", age: 29 }
     ],
     paragraphs: [
       {
@@ -46,19 +46,42 @@ class App extends Component {
     });
   };
 
-  updateNameHandler = event => {
-    this.setState({
-      students: [
-        { name: "John", age: 28 },
-        { name: event.target.value, age: 25 },
-        { name: "Mark new", age: 29 }
-      ]
+  updateNameHandler = (event, id) => {
+    const studentIndex = this.state.students.findIndex(s => {
+      return s.id === id;
     });
+
+    const student = {
+      ...this.state.students[studentIndex]
+    };
+
+    // const student = Object.assign({}, this.state.students[studentIndex]);
+
+    student.name = event.target.value;
+
+    const students = [...this.state.students];
+    students[studentIndex] = student;
+
+    this.setState({ students: students });
+
+    // this.setState({
+    //   students: [
+    //     { name: "John", age: 28 },
+    //     { name: event.target.value, age: 25 },
+    //     { name: "Mark new", age: 29 }
+    //   ]
+    // });
   };
 
   toggleStudentsHandler = () => {
     const showStudentsDiv = this.state.showStudents;
-    this.setState({'showStudents': !showStudentsDiv});
+    this.setState({ showStudents: !showStudentsDiv });
+  };
+
+  deleteStudentHandler = studentIndex => {
+    const students = [...this.state.students];
+    students.splice(studentIndex, 1);
+    this.setState({ students: students });
   };
 
   changeUsernameHandler = newUsername => {
@@ -79,12 +102,36 @@ class App extends Component {
   };
 
   render() {
-
     let students = null;
     if (this.state.showStudents) {
       students = (
         <div>
-            <Student
+          {this.state.students.map((student, index) => {
+            return (
+              <Student
+                name={student.name}
+                age={student.age}
+                key={student.id}
+                click={() => this.deleteStudentHandler(index)}
+                updated={event => this.updateNameHandler(event, student.id)}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+
+    return (
+      <div className="App">
+        <h1>Hi, I'm starting udemy react course!!!</h1>
+        <p>This is test for the child paragraph.</p>
+        {/* <button onClick={this.changeNameHandler.bind(this, "Updated one")}>
+          Change Name
+        </button> */}
+        <button onClick={this.toggleStudentsHandler}>Toggle Students</button>
+        {students}
+
+        {/* <Student
               name={this.state.students[0].name}
               age={this.state.students[0].age}
             />
@@ -99,20 +146,8 @@ class App extends Component {
             <Student
               name={this.state.students[2].name}
               age={this.state.students[2].age}
-            />
-          </div>
-      );
-    }
+            /> */}
 
-    return (
-      <div className="App">
-        <h1>Hi, I'm starting udemy react course!!!</h1>
-        <p>This is test for the child paragraph.</p>
-        <button onClick={this.changeNameHandler.bind(this, "Updated one")}>
-          Change Name
-        </button>
-        <button onClick={this.toggleStudentsHandler}>Toggle Students</button>
-        { students }
         {/* <UserOutput
           username={this.state.paragraphs[0].username}
           text1={this.state.paragraphs[0].text1}
