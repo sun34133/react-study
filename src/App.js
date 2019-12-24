@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
 import Student from "./Student/Student";
-import UserOutput from "./User/UserOutput/UserOutput";
+
+import UserInput from "./UserInput/UserInput";
+import UserOutput from "./UserOutput/UserOutput";
+
+import Validation from "./Validation/Validation";
+import Char from "./Char/Char";
 
 // function App() {
 //   return (
@@ -30,7 +35,9 @@ class App extends Component {
         text2: "example text two"
       }
     ],
-    showStudents: false
+    username: "SuperMax",
+    showStudents: false,
+    userInput: ""
   };
 
   changeNameHandler = newName => {
@@ -101,7 +108,7 @@ class App extends Component {
     });
   };
 
-  render() {
+  renderSection12() {
     let students = null;
     if (this.state.showStudents) {
       students = (
@@ -165,6 +172,63 @@ class App extends Component {
 
     // return React.createElement('div', null, 'h1', 'Hi, I am starting udemy react course!!!');
     // return React.createElement('div', { className: 'App'}, React.createElement('h1', null, 'Hi, I am starting udemy react course!!!'))
+  }
+
+  usernameChangedHandler = event => {
+    this.setState({ username: event.target.value });
+  };
+
+  renderSection3() {
+    return (
+      <div className="App">
+        <UserInput
+          changed={this.usernameChangedHandler}
+          currentName={this.state.username}
+        />
+        <UserOutput userName="Sunil" />
+        <UserOutput userName={this.state.username} />
+        <UserOutput userName={this.state.username} />
+      </div>
+    );
+  }
+
+  inputChangedHandler = event => {
+    this.setState({ userInput: event.target.value });
+  };
+
+  deleteCharHandler = index => {
+    const txt = this.state.userInput.split("");
+    txt.splice(index, 1);
+    const updatedTxt = txt.join("");
+    this.setState({ userInput: updatedTxt });
+  };
+
+  render() {
+    const charList = this.state.userInput.split("").map((ch, index) => {
+      return (
+        <Char
+          character={ch}
+          key={index}
+          clicked={() => this.deleteCharHandler(index)}
+        />
+      );
+    });
+
+    return (
+      <div className="App">
+        <input
+          type="text"
+          className="charInput"
+          onChange={this.inputChangedHandler}
+          value={this.state.userInput}
+        />
+
+        <p>{this.state.userInput}</p>
+        <Validation inputLength={this.state.userInput.length} />
+
+        {charList}
+      </div>
+    );
   }
 }
 

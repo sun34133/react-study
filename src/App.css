@@ -9,3 +9,8 @@
   color: #fff;
   cursor: pointer;
 }
+.charInput {
+  border: 2px solid red;
+  padding: 5px;
+  margin: 10px auto;
+}
