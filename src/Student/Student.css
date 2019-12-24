@@ -1,14 +1,14 @@
 .Student {
-    width: 75%;
-    margin: 20px auto;
-    border: 1px solid #ededee;
-    padding: 10px;
-    box-shadow: 0 2px #cccccc;
-    text-align: center;
+  width: 75%;
+  margin: 20px auto;
+  border: 1px solid #ededee;
+  padding: 10px;
+  box-shadow: 0 2px #cccccc;
+  text-align: center;
 }
 
 @media (min-width: 500px) {
-    .Student {
-        width: 450px
-    }
+  .Student {
+    width: 450px;
   }
+}

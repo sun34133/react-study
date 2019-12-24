@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import "./App.css";
 
 import Student from "./Student/Student";
@@ -17,21 +16,6 @@ import Char from "./Char/Char";
 //     </div>
 //   );
 // }
-
-const StyledButton = styled.button`
-  background-color: ${props => (props.alt ? "red" : "green")};
-  border: 1px solid blue;
-  padding: 10px;
-  font: inherit;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${props => (props.alt ? "salmon" : "lightgreen")};
-    color: black;
-  }
-`;
 
 class App extends Component {
   state = {
@@ -182,44 +166,15 @@ class App extends Component {
         {/* <button onClick={this.changeNameHandler.bind(this, "Updated one")}>
           Change Name
         </button> */}
-        <StyledButton
-          alt={this.state.showStudents}
+        <button
+          className="button"
           onClick={this.toggleStudentsHandler}
         >
           Toggle Students
-        </StyledButton>
+        </button>
 
         {students}
 
-        {/* <Student
-              name={this.state.students[0].name}
-              age={this.state.students[0].age}
-            />
-            <Student
-              name={this.state.students[1].name}
-              age={this.state.students[1].age}
-              click={this.changeNameHandler.bind(this, "aon one")}
-              updated={this.updateNameHandler}
-            >
-              My hobbies: Swimming, Dancing, Surfing etc{" "}
-            </Student>
-            <Student
-              name={this.state.students[2].name}
-              age={this.state.students[2].age}
-            /> */}
-
-        {/* <UserOutput
-          username={this.state.paragraphs[0].username}
-          text1={this.state.paragraphs[0].text1}
-          text2={this.state.paragraphs[0].text2}
-          click={this.changeUsernameHandler.bind(this, "Ajay Jadeja")}
-          updated={this.updateUserNameHandler}
-        />
-        <UserOutput
-          username={this.state.paragraphs[1].username}
-          text1={this.state.paragraphs[1].text1}
-          text2={this.state.paragraphs[1].text2}
-        /> */}
       </div>
     );
 

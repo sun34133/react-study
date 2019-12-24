@@ -30,3 +30,18 @@
 .regular {
   font-weight: normal;
 }
+
+.button {
+  background-color: green;
+  border: 1px solid blue;
+  padding: 10px;
+  font: inherit;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.button:hover {
+    background-color: lightgreen;
+    color: black;
+  }
