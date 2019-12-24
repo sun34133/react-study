@@ -1,8 +1,8 @@
 .App {
   text-align: center;
 }
-.App button {
-  background: orangered;
+.App button2 {
+  background: green;
   border: 2px solid #fff;
   padding: 10px;
   border-radius: 10px;
@@ -13,4 +13,20 @@
   border: 2px solid red;
   padding: 5px;
   margin: 10px auto;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.regular {
+  font-weight: normal;
 }

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import "./App.css";
+
 import Student from "./Student/Student";
 
 import UserInput from "./UserInput/UserInput";
@@ -15,6 +17,21 @@ import Char from "./Char/Char";
 //     </div>
 //   );
 // }
+
+const StyledButton = styled.button`
+  background-color: ${props => (props.alt ? "red" : "green")};
+  border: 1px solid blue;
+  padding: 10px;
+  font: inherit;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => (props.alt ? "salmon" : "lightgreen")};
+    color: black;
+  }
+`;
 
 class App extends Component {
   state = {
@@ -108,7 +125,21 @@ class App extends Component {
     });
   };
 
-  renderSection12() {
+  render() {
+    const styles = {
+      backgroundColor: "green",
+      border: "1px solid blue",
+      padding: "10px",
+      font: "inherit",
+      borderRadius: "5px",
+      color: "#fff",
+      cursor: "pointer",
+      ":hover": {
+        backgroundColor: "lightgreen",
+        color: "black"
+      }
+    };
+
     let students = null;
     if (this.state.showStudents) {
       students = (
@@ -126,16 +157,38 @@ class App extends Component {
           })}
         </div>
       );
+
+      // styles.backgroundColor = "red";
+      // styles[":hover"] = {
+      //   backgroundColor: "salmon",
+      //   color: "black"
+      // };
+    }
+
+    const classes = [];
+    if (this.state.students.length <= 2) {
+      classes.push("bold");
+    }
+    if (this.state.students.length < 5) {
+      classes.push("red");
     }
 
     return (
       <div className="App">
         <h1>Hi, I'm starting udemy react course!!!</h1>
-        <p>This is test for the child paragraph.</p>
+        <p className={classes.join(" ")}>
+          This is test for the child paragraph.
+        </p>
         {/* <button onClick={this.changeNameHandler.bind(this, "Updated one")}>
           Change Name
         </button> */}
-        <button onClick={this.toggleStudentsHandler}>Toggle Students</button>
+        <StyledButton
+          alt={this.state.showStudents}
+          onClick={this.toggleStudentsHandler}
+        >
+          Toggle Students
+        </StyledButton>
+
         {students}
 
         {/* <Student
@@ -203,7 +256,7 @@ class App extends Component {
     this.setState({ userInput: updatedTxt });
   };
 
-  render() {
+  renderSection4() {
     const charList = this.state.userInput.split("").map((ch, index) => {
       return (
         <Char
