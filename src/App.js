@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import classes from "./App.css";
 
 import Student from "./Student/Student";
 
@@ -110,21 +110,9 @@ class App extends Component {
   };
 
   render() {
-    const styles = {
-      backgroundColor: "green",
-      border: "1px solid blue",
-      padding: "10px",
-      font: "inherit",
-      borderRadius: "5px",
-      color: "#fff",
-      cursor: "pointer",
-      ":hover": {
-        backgroundColor: "lightgreen",
-        color: "black"
-      }
-    };
-
     let students = null;
+    let btnClass = [classes.button]
+
     if (this.state.showStudents) {
       students = (
         <div>
@@ -142,39 +130,31 @@ class App extends Component {
         </div>
       );
 
-      // styles.backgroundColor = "red";
-      // styles[":hover"] = {
-      //   backgroundColor: "salmon",
-      //   color: "black"
-      // };
+      btnClass.push(classes.Red);
     }
 
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.students.length <= 2) {
-      classes.push("bold");
+      assignedClasses.push(classes.bold);
     }
     if (this.state.students.length < 5) {
-      classes.push("red");
+      assignedClasses.push(classes.red);
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm starting udemy react course!!!</h1>
-        <p className={classes.join(" ")}>
+        <p className={assignedClasses.join(" ")}>
           This is test for the child paragraph.
         </p>
         {/* <button onClick={this.changeNameHandler.bind(this, "Updated one")}>
           Change Name
         </button> */}
-        <button
-          className="button"
-          onClick={this.toggleStudentsHandler}
-        >
+        <button className={btnClass.join(' ')} onClick={this.toggleStudentsHandler}>
           Toggle Students
         </button>
 
         {students}
-
       </div>
     );
 
