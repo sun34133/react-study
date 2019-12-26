@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classes from "./App.css";
 
 import Student from "./Student/Student";
+import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 
 import UserInput from "./UserInput/UserInput";
 import UserOutput from "./UserOutput/UserOutput";
@@ -111,21 +112,20 @@ class App extends Component {
 
   render() {
     let students = null;
-    let btnClass = [classes.button]
+    let btnClass = [classes.button];
 
     if (this.state.showStudents) {
       students = (
         <div>
           {this.state.students.map((student, index) => {
-            return (
-              <Student
-                name={student.name}
-                age={student.age}
-                key={student.id}
-                click={() => this.deleteStudentHandler(index)}
-                updated={event => this.updateNameHandler(event, student.id)}
-              />
-            );
+            return <ErrorBoundary key={student.id}>
+                <Student
+                  name={student.name}
+                  age={student.age}
+                  click={() => this.deleteStudentHandler(index)}
+                  updated={event => this.updateNameHandler(event, student.id)}
+                />
+              </ErrorBoundary>
           })}
         </div>
       );
@@ -150,7 +150,10 @@ class App extends Component {
         {/* <button onClick={this.changeNameHandler.bind(this, "Updated one")}>
           Change Name
         </button> */}
-        <button className={btnClass.join(' ')} onClick={this.toggleStudentsHandler}>
+        <button
+          className={btnClass.join(" ")}
+          onClick={this.toggleStudentsHandler}
+        >
           Toggle Students
         </button>
 
