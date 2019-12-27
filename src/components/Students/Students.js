@@ -14,21 +14,25 @@ class Students extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log("[Students.js] shouldComponentUpdate");
-    return true;
+    if (nextProps.students !== this.props.students) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log("[Students.js] getSnapshotBeforeUpdate");
-    return {message: 'Snapshot!!'};
+    return { message: "Snapshot!!" };
   }
 
   componentDidUpdate(prevProps, prevState, snapShot) {
     console.log("[Persons.js] componentDidUpdate");
-    console.log(snapShot)
+    console.log(snapShot);
   }
 
   componentWillUnmount() {
-    console.log('[Persons.js] componentWillUnmount');
+    console.log("[Persons.js] componentWillUnmount");
   }
 
   render() {
