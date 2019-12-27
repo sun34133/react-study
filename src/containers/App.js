@@ -3,7 +3,8 @@ import classes from "./App.css";
 
 import Students from "../components/Students/Students";
 import Cockpit from "../components/Cockpit/Cockpit";
-import WithClass from "../hoc/WithClass";
+import withClass from "../hoc/WithClass";
+import Aux from "../hoc/Aux";
 
 class App extends Component {
   constructor(props) {
@@ -88,21 +89,24 @@ class App extends Component {
     }
 
     return (
-      <WithClass classes={classes.App}>
-        <button 
-          onClick={() => { 
-            this.setState({showCockpit: false});
+      <Aux classes={classes.App}>
+        <button
+          onClick={() => {
+            this.setState({ showCockpit: false });
           }}
-          >Remove Cockpit</button>
-        { this.state.showCockpit ? 
-        <Cockpit
-          title={this.props.appTitle}
-          showStudents={this.state.showStudents}
-          students={this.state.students}
-          clicked={this.toggleStudentsHandler}
-        /> : null }
+        >
+          Remove Cockpit
+        </button>
+        {this.state.showCockpit ? (
+          <Cockpit
+            title={this.props.appTitle}
+            showStudents={this.state.showStudents}
+            students={this.state.students}
+            clicked={this.toggleStudentsHandler}
+          />
+        ) : null}
         {students}
-      </WithClass>
+      </Aux>
     );
 
     // return React.createElement('div', null, 'h1', 'Hi, I am starting udemy react course!!!');
@@ -110,4 +114,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withClass(App, classes.App);

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Aux from "../../../hoc/Aux";
+import withClass from "../../../hoc/WithClass";
 import classes from "./Student.css";
 
 class Student extends Component {
@@ -22,4 +23,4 @@ class Student extends Component {
   }
 }
 
-export default Student;
+export default withClass(Student, classes.Student);
