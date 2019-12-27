@@ -2,12 +2,13 @@ import React from 'react';
 
 import classes from './Cockpit.css';
 
-const cockpit = (props) => {
+const cockpit = ( props ) => {
     const assignedClasses = [];
     let btnClass = '';
     if (props.showStudents) {
         btnClass = classes.Red;
     }
+
     if (props.students.length <= 2) {
       assignedClasses.push(classes.bold);
     }
@@ -17,7 +18,7 @@ const cockpit = (props) => {
 
     return (
         <div className={classes.Cockpit}>
-            <h1>Hi, I'm starting udemy react course!!!</h1>
+            <h1>{props.title}</h1>
             <p className={assignedClasses.join(" ")}>This is test for the child paragraph.</p>
             <button
                 className={btnClass}

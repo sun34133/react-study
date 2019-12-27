@@ -1,15 +1,45 @@
-import React from "react";
+import React, { Component } from "react";
 
 import Student from "./Student/Student";
 
-const students = (props) => props.students.map((student, index) => {
-    return <Student
-        name={student.name}
-        age={student.age}
-        key={student.id}
-        click={() => props.clicked(index)}
-        updated={ (event) => props.updated(event, student.id)}
-      />
-  });
+class Students extends Component {
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log("[Students.js] getDerivedStateFromProps", props);
+  //   return state;
+  // }
 
-export default students;
+  // componentWillReceiveProps(props) {
+  //   console.log("[Persons.js] componentWillReceiveProps", props);
+  // }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[Students.js] shouldComponentUpdate");
+    return true;
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log("[Students.js] getSnapshotBeforeUpdate");
+    return {message: 'Snapshot!!'};
+  }
+
+  componentDidUpdate(prevProps, prevState, snapShot) {
+    console.log("[Persons.js] componentDidUpdate");
+    console.log(snapShot)
+  }
+
+  render() {
+    console.log("[Students.js] rendering....");
+    return this.props.students.map((student, index) => {
+      return (
+        <Student
+          name={student.name}
+          age={student.age}
+          key={student.id}
+          click={() => this.props.clicked(index)}
+          updated={event => this.props.updated(event, student.id)}
+        />
+      );
+    });
+  }
+}
+export default Students;
