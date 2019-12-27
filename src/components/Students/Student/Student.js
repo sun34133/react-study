@@ -6,7 +6,6 @@ import withClass from "../../../hoc/WithClass";
 import classes from "./Student.css";
 
 class Student extends Component {
-
   constructor(props) {
     super(props);
     this.inputElementRef = React.createRef();
@@ -21,6 +20,7 @@ class Student extends Component {
     console.log("[Student.js] rendering....");
     return (
       <Aux>
+        {this.props.isAuth ? <p>Authenticated!!</p> : <p>Please log in..</p>}
         <p onClick={this.props.click}>
           I'm {this.props.name} and I am {this.props.age} years old!
         </p>

@@ -49,6 +49,7 @@ class Students extends PureComponent {
           key={student.id}
           click={() => this.props.clicked(index)}
           updated={event => this.props.updated(event, student.id)}
+          isAuth={this.props.isAuthenticated}
         />
       );
     });
