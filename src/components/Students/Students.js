@@ -27,6 +27,10 @@ class Students extends Component {
     console.log(snapShot)
   }
 
+  componentWillUnmount() {
+    console.log('[Persons.js] componentWillUnmount');
+  }
+
   render() {
     console.log("[Students.js] rendering....");
     return this.props.students.map((student, index) => {
