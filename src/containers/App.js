@@ -20,7 +20,8 @@ class App extends Component {
     ],
     otherState: "some other value",
     showStudents: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCounter: 0
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -61,7 +62,17 @@ class App extends Component {
     const students = [...this.state.students];
     students[studentIndex] = student;
 
-    this.setState({ students: students });
+    // this.setState({
+    //   students: students,
+    //   changeCounter: this.state.changeCounter + 1
+    // });
+
+    this.setState((prevState, props) => {
+      return {
+        students: students,
+        changeCounter: prevState.changeCounter + 1
+      };
+    });
   };
 
   toggleStudentsHandler = () => {
