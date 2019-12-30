@@ -5,6 +5,7 @@ import Students from "../components/Students/Students";
 import Cockpit from "../components/Cockpit/Cockpit";
 import withClass from "../hoc/WithClass";
 import Aux from "../hoc/Aux";
+import AuthContext from "../context/auth-context";
 
 class App extends Component {
   constructor(props) {
@@ -88,7 +89,7 @@ class App extends Component {
   };
 
   loginHandler = () => {
-    this.setState({ isAuthenticated: true });
+    this.setState({ authenticated: true });
   };
 
   render() {
@@ -114,16 +115,22 @@ class App extends Component {
         >
           Remove Cockpit
         </button>
-        {this.state.showCockpit ? (
-          <Cockpit
-            title={this.props.appTitle}
-            showStudents={this.state.showStudents}
-            students={this.state.students}
-            clicked={this.toggleStudentsHandler}
-            login={this.loginHandler}
-          />
-        ) : null}
-        {students}
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.authenticated,
+            login: this.loginHandler
+          }}
+        >
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              showStudents={this.state.showStudents}
+              students={this.state.students}
+              clicked={this.toggleStudentsHandler}
+            />
+          ) : null}
+          {students}
+        </AuthContext.Provider>
       </Aux>
     );
 
